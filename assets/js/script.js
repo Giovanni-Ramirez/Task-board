@@ -2,6 +2,11 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+// adding the date picker from Jquery
+$( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
 
