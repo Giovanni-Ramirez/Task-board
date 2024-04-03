@@ -41,16 +41,16 @@
               <input type="text" class="form-control" id="task-name">
             </div>
             <div class="form-group">
-              <label for="description-text" class="col-form-label">Description:</label>
-              <textarea class="form-control" id="description-text"></textarea>
+              <label for="task-description" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="task-description"></textarea>
             </div>
             <div class="form-group">
-              <label for="datepicker" class="col-form-label">Due Date:</label>
-              <input type="text" class="form-control" id="datepicker">
+              <label for="task-date" class="col-form-label">Due Date:</label>
+              <input type="text" class="form-control" id="task-date">
             </div>
           </form>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add Task</button>
+            <button id="formSubmit" type="button" class="btn btn-success" data-bs-dismiss="modal">Add Task</button>
           </div>
         </div>
       </div>
@@ -64,7 +64,9 @@
             <h2 class="card-title mb-1">To Do</h2>
           </div>
           <div class="card-body bg-light">
-            <div id="todo-cards"></div>
+            <div id="todo-cards">
+              <!-- card goes -->
+            </div>
           </div>
         </div>
       </div>
@@ -74,17 +76,21 @@
             <h2 class="card-title mb-1">In Progress</h2>
           </div>
           <div class="card-body bg-light">
-            <div id="in-progress-cards"></div>
+            <div id="in-progress-cards">
+              <!-- card goes -->
+            </div>
           </div>
         </div>
-        </div>
-        <div class="col-12 col-lg-4 d-flex">
-          <div id="done" class="card border-light mb-3 lane flex-grow-1">
-            <div class="card-header bg-white">
-              <h2 class="card-title mb-1">Done</h2>
-            </div>
-            <div class="card-body bg-light">
-              <div id="done-cards"></div>
+      </div>
+      <div class="col-12 col-lg-4 d-flex">
+        <div id="done" class="card border-light mb-3 lane flex-grow-1">
+          <div class="card-header bg-white">
+            <h2 class="card-title mb-1">Done</h2>
+          </div>
+          <div class="card-body bg-light">
+            <div id="done-cards">
+                <!-- card goes -->
+              </div>
           </div>
           </div>
       </div>
