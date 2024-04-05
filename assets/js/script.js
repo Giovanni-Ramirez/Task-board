@@ -9,11 +9,6 @@ const taskTextInput = $('#task-description');
 const taskDueDateInput = $('#task-date'); // mm/dd/yyyy
 
 
-
-// DONE adding the date picker from Jquery
-// $( function() {
-//     $( "#task-date" ).datepicker();
-// } );
   
 // DONE TODO: create a function to generate a unique task id
 function generateTaskId() {
@@ -31,7 +26,7 @@ function generateTaskId() {
     return Number(id)
 };
 
-// STEP #2 Reads if we have a local storage to push the newTask into
+// STEP #1 Reads if we have a local storage to push the newTask into
 function readTasksFromStorage() {
     let tasks = JSON.parse(localStorage.getItem('tasks'));
 
@@ -42,12 +37,12 @@ function readTasksFromStorage() {
     return tasks
 };
 
-// STEP #3
+// STEP #2
 function saveTasksToStorage(tasks) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
-// STEP #4 TODO: create a function to render the task list and make cards draggable
+// STEP #3 TODO: create a function to render the task list and make cards draggable
 function renderTaskList() {
     const tasks = readTasksFromStorage();
 
@@ -60,6 +55,8 @@ function renderTaskList() {
     const doneCards = $('#done-cards');
     doneCards.empty();
 
+
+    // This will send this to the create task card function ~~~ step #4
     for (let task of tasks) {
         if (task.status === 'to-do') {
             todoCards.append(createTaskCard(task));
@@ -87,7 +84,7 @@ function renderTaskList() {
       });
 }
 
-// STEP #5 TODO: a function to create a task card  *** NEEDS MORE FOR COLORING ***
+// STEP #4 TODO: a function to create a task car
 function createTaskCard(task) {
     const taskCard = $('<div>').addClass('card project-card draggable my-3').attr('data-task-id', task.id);
     const cardHeader = $('<div>').addClass('card-header h4').text(task.name);
@@ -96,7 +93,8 @@ function createTaskCard(task) {
     const cardDescription =$('<p>').addClass('card-text').text(task.text);
     const cardDueDate = $('<p>').addClass('card-text').text(task.dueDate);
     const cardDeleteBtn = $('<button>').addClass('btn btn-danger delete').text('Delete').attr('data-task-id', task.id);
-    // This is a function that we have to make
+
+    // This is another function separate from just displaying the cards
     cardDeleteBtn.on('click', handleDeleteTask);
 
     // Coloring goes here
@@ -121,10 +119,11 @@ function createTaskCard(task) {
     return taskCard;
 }
 
-// STEP #1 When the button is first clicked
+// This is the MAIN function that is called from the Button on the form
 function handleAddTask(event){
     event.preventDefault();
 
+    // get all the inputs from the form
     const taskId = generateTaskId();
     const taskName = taskNameInput.val().trim();
     const taskText = taskTextInput.val().trim();
@@ -139,14 +138,17 @@ function handleAddTask(event){
         status: 'to-do'
     };
 
+    // step #1 we take the array from storage from this function
     const tasks = readTasksFromStorage();
     tasks.push(newTask);
 
+    // step #2 we send this updated array back to local storage
     saveTasksToStorage(tasks);
 
+    // step #3 we send this to render it on the screen
     renderTaskList();
 
-    // Clear the input at the end of all our work
+    //step # 4 Clear the input at the end of all our work
     taskNameInput.val('');
     taskTextInput.val('');
     taskDueDateInput.val('');
@@ -158,17 +160,14 @@ function handleDeleteTask(){
     const taskId = $(this).attr('data-task-id');
     const tasks = readTasksFromStorage();
 
-    // console.log(`This is the id we are looking for a match ${taskId}`)
-    // console.log(tasks)
+    
 
     for (i = 0; i < tasks.length; i++) {
         if (tasks[i].id === Number(taskId)) {
-            // console.log('hey we found a match!!!');
             tasks.splice(i, 1);
         }
     }
 
-    // console.log(tasks);
 
     saveTasksToStorage(tasks);
 
